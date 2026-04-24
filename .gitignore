@@ -1,0 +1,10 @@
+node_modules
+.next
+.codex
+out
+dist
+.env
+.env.local
+*.log
+*.tsbuildinfo
+data/registrations.json
