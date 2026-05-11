@@ -1,0 +1,66 @@
+import {
+  ArrowRight,
+  BookOpenCheck,
+  BriefcaseBusiness,
+  Calendar,
+  CheckCircle2,
+  ChevronDown,
+  ChevronRight,
+  Clock,
+  Database,
+  Download,
+  FileCheck2,
+  GraduationCap,
+  IndianRupee,
+  LayoutGrid,
+  LineChart,
+  Mail,
+  MapPin,
+  Menu,
+  MessageCircle,
+  Phone,
+  Quote,
+  ShieldCheck,
+  Sparkles,
+  Star,
+  TrendingUp,
+  Users,
+  Workflow,
+  X
+} from "lucide-react";
+import type { LucideIcon } from "lucide-react";
+
+export const iconMap: Record<string, LucideIcon> = {
+  ArrowRight,
+  BookOpenCheck,
+  BriefcaseBusiness,
+  Calendar,
+  CheckCircle2,
+  ChevronDown,
+  ChevronRight,
+  Clock,
+  Database,
+  Download,
+  FileCheck2,
+  GraduationCap,
+  IndianRupee,
+  LayoutGrid,
+  LineChart,
+  Mail,
+  MapPin,
+  Menu,
+  MessageCircle,
+  Phone,
+  Quote,
+  ShieldCheck,
+  Sparkles,
+  Star,
+  TrendingUp,
+  Users,
+  Workflow,
+  X
+};
+
+export function getIcon(name: string): LucideIcon {
+  return iconMap[name] ?? Sparkles;
+}

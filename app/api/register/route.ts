@@ -1,62 +1,57 @@
 import { promises as fs } from "fs";
 import path from "path";
 import { NextResponse } from "next/server";
-
-type Registration = {
-  fullName: string;
-  mobile: string;
-  whatsapp: string;
-  email: string;
-  qualification: string;
-  city: string;
-  year: string;
-  message?: string;
-};
+import { sendLeadEmail } from "@/lib/email";
+import { getClientIp, rateLimit } from "@/lib/rate-limit";
+import { type RegistrationInput, validateRegistration } from "@/lib/validate";
 
 const dataFile = path.join(process.cwd(), "data", "registrations.json");
 
-function isValidRegistration(input: Partial<Registration>) {
-  const phoneRegex = /^[6-9]\d{9}$/;
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  const year = Number(input.year);
-  const currentYear = new Date().getFullYear();
-
-  return (
-    Boolean(input.fullName?.trim()) &&
-    Boolean(input.city?.trim()) &&
-    phoneRegex.test(input.mobile ?? "") &&
-    phoneRegex.test(input.whatsapp ?? "") &&
-    emailRegex.test(input.email ?? "") &&
-    ["B.Pharmacy", "M.Pharmacy"].includes(input.qualification ?? "") &&
-    Number.isInteger(year) &&
-    year >= 1990 &&
-    year <= currentYear + 1
-  );
-}
-
 export async function POST(request: Request) {
+  const ip = getClientIp(request.headers);
+  const limit = rateLimit(`register:${ip}`, 5, 60_000);
+  if (!limit.ok) {
+    return NextResponse.json(
+      { error: "Too many submissions. Please wait a minute." },
+      { status: 429, headers: { "Retry-After": String(limit.retryAfter ?? 60) } }
+    );
+  }
+
+  let body: Partial<RegistrationInput>;
   try {
-    const body = (await request.json()) as Partial<Registration>;
+    body = (await request.json()) as Partial<RegistrationInput>;
+  } catch {
+    return NextResponse.json({ error: "Invalid JSON body" }, { status: 400 });
+  }
 
-    if (!isValidRegistration(body)) {
-      return NextResponse.json({ error: "Invalid registration data" }, { status: 400 });
-    }
+  if (body.hp && body.hp.trim().length > 0) {
+    return NextResponse.json({ ok: true });
+  }
 
-    const registration = {
-      fullName: body.fullName?.trim(),
-      mobile: body.mobile,
-      whatsapp: body.whatsapp,
-      email: body.email?.trim(),
-      qualification: body.qualification,
-      city: body.city?.trim(),
-      year: body.year,
-      message: body.message?.trim() ?? "",
-      interestedIn: "Pharma Career Coaching",
-      createdAt: new Date().toISOString()
-    };
+  const errors = validateRegistration(body);
+  if (Object.keys(errors).length > 0) {
+    return NextResponse.json({ error: "Invalid registration data", fields: errors }, { status: 400 });
+  }
 
+  const registration = {
+    fullName: body.fullName?.trim(),
+    mobile: body.mobile,
+    whatsapp: body.whatsapp,
+    email: body.email?.trim(),
+    qualification: body.qualification,
+    city: body.city?.trim(),
+    year: body.year,
+    message: body.message?.trim() ?? "",
+    interestedIn: "Clinical Data Management Program",
+    ip,
+    userAgent: request.headers.get("user-agent") ?? null,
+    createdAt: new Date().toISOString()
+  };
+
+  await sendLeadEmail("New CDM enquiry · Medsafe Solutions", registration);
+
+  try {
     await fs.mkdir(path.dirname(dataFile), { recursive: true });
-
     let existing: unknown[] = [];
     try {
       const file = await fs.readFile(dataFile, "utf8");
@@ -64,12 +59,10 @@ export async function POST(request: Request) {
     } catch {
       existing = [];
     }
-
-    // Replace with Supabase later.
     await fs.writeFile(dataFile, JSON.stringify([...existing, registration], null, 2));
-
-    return NextResponse.json({ ok: true });
-  } catch {
-    return NextResponse.json({ error: "Unable to save registration" }, { status: 500 });
+  } catch (err) {
+    console.warn("[register] file persistence failed (expected on serverless)", err);
   }
+
+  return NextResponse.json({ ok: true });
 }
