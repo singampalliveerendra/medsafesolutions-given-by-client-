@@ -399,25 +399,20 @@ img { display: block; }
 
 /* ── Marquee ── */
 
-.eligibility-marquee,
-.logo-marquee {
+.eligibility-marquee {
   position: relative;
   overflow: hidden;
   mask-image: linear-gradient(90deg, transparent, black 8%, black 92%, transparent);
 }
 
-.eligibility-track,
-.logo-track {
+.eligibility-track {
   display: flex;
   width: max-content;
   gap: 1.25rem;
   animation: marquee 42s linear infinite;
 }
 
-.eligibility-track:hover,
-.logo-track:hover { animation-play-state: paused; }
-
-.logo-track { gap: 3rem; align-items: center; }
+.eligibility-track:hover { animation-play-state: paused; }
 
 .eligibility-card {
   width: min(22rem, 80vw);

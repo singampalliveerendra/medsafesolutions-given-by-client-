@@ -23,12 +23,14 @@ export const programPillars = [
   }
 ] as const;
 
+// Logos for each tool are rendered in components/sections/Tools.tsx via the
+// ToolLogo component (react-icons for the brand logos, lucide Mail for Email).
 export const masterTools = [
-  { name: "MedDRA", desc: "Medical terminology coding", grad: "from-navy-600 to-navy-800", icon: "ShieldCheck" },
-  { name: "Excel", desc: "Data handling & reconciliation", grad: "from-emerald-500 to-emerald-700", icon: "LineChart" },
-  { name: "PowerPoint", desc: "Reporting & presentations", grad: "from-gold-400 to-gold-600", icon: "BookOpenCheck" },
-  { name: "ChatGPT", desc: "AI-assisted documentation", grad: "from-cyan-500 to-navy-600", icon: "Sparkles" },
-  { name: "Email", desc: "Professional communication", grad: "from-navy-500 to-navy-700", icon: "Mail" }
+  { name: "MedDRA", desc: "Medical terminology coding" },
+  { name: "Excel", desc: "Data handling & reconciliation" },
+  { name: "PowerPoint", desc: "Reporting & presentations" },
+  { name: "ChatGPT", desc: "AI-assisted documentation" },
+  { name: "Email", desc: "Professional communication" }
 ] as const;
 
 export const toolCards = [
@@ -274,9 +276,6 @@ export const learnerCards = [
 export const navItems = [
   { label: "Home", href: "/#home" },
   { label: "Program", href: "/#program" },
-  { label: "Faculty", href: "/#faculty" },
-  { label: "Batches", href: "/#batches" },
-  { label: "Placements", href: "/#placements" },
   { label: "Blog", href: "/blog" },
   { label: "FAQ", href: "/#faq" },
   { label: "Contact", href: "/#contact" }

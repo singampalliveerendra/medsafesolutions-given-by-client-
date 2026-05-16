@@ -50,7 +50,7 @@ export default function OG() {
             CDM training built for a sharper, job-ready future.
           </div>
           <div style={{ fontSize: 28, color: "#cfe1ff", maxWidth: 900 }}>
-            EDC workflows · CDISC orientation · Query handling · Placement support · Kakinada, Andhra Pradesh
+            EDC workflows · CDISC orientation · Query handling · Placement support · Visakhapatnam, Andhra Pradesh
           </div>
         </div>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", fontSize: 22 }}>

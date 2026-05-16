@@ -3,21 +3,22 @@ export const site = {
   tagline: "Clinical Data Management Training",
   url: "https://medsafesolutions.in",
   description:
-    "Job-oriented Clinical Data Management training in Kakinada. EDC workflows, CDISC orientation, query handling, and placement support for B.Pharm, M.Pharm, nursing, biotech, and life-science graduates.",
+    "Job-oriented Clinical Data Management training in Visakhapatnam. EDC workflows, CDISC orientation, query handling, and placement support for B.Pharm, M.Pharm, nursing, biotech, and life-science graduates.",
+  founder: "Chintapenta Santosh",
   phone: "9014440263",
   phoneE164: "+919014440263",
   whatsapp: "919014440263",
   email: "medsafesolutions2023@gmail.com",
   address: {
-    street: "Plot No. 12, Sarpavaram Junction",
-    locality: "Kakinada",
+    street: "19-27-43/1, Sampath Niwas Apartment, Near Gandhi Nagar Park, Pedagantyada",
+    locality: "Visakhapatnam",
     region: "Andhra Pradesh",
-    postalCode: "533005",
+    postalCode: "530044",
     country: "IN"
   },
   hours: "Mon–Sat · 9:30 AM – 7:00 PM",
   mapEmbed:
-    "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15276.9!2d82.232!3d16.989!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zS2FraW5hZGE!5e0!3m2!1sen!2sin",
+    "https://www.google.com/maps?q=19-27-43%2F1+Sampath+Niwas+Apartment+Pedagantyada+Visakhapatnam+530044&output=embed",
   socials: {
     instagram: "https://instagram.com/",
     linkedin: "https://www.linkedin.com/",

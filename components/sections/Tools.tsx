@@ -1,9 +1,32 @@
 import Image from "next/image";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Mail } from "lucide-react";
+import { SiOpenai } from "react-icons/si";
+import { FaFileExcel, FaFilePowerpoint } from "react-icons/fa";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { toolCards, masterTools } from "@/data/sections";
 import { getIcon } from "@/lib/icons";
+
+const TOOL_ICON_SIZE = 40;
+
+function ToolLogo({ name }: { name: string }) {
+  switch (name) {
+    case "Excel":
+      return <FaFileExcel size={TOOL_ICON_SIZE} color="#107C41" aria-label="Microsoft Excel logo" />;
+    case "PowerPoint":
+      return <FaFilePowerpoint size={TOOL_ICON_SIZE} color="#B7472A" aria-label="Microsoft PowerPoint logo" />;
+    case "ChatGPT":
+      return <SiOpenai size={TOOL_ICON_SIZE} color="#000000" aria-label="ChatGPT logo" />;
+    case "Email":
+      return <Mail className="h-10 w-10 text-navy-700" aria-label="Email" />;
+    case "MedDRA":
+    default:
+      // TODO: Replace with official MedDRA logo image when available
+      return (
+        <span className="font-display text-[0.78rem] font-black tracking-tight text-navy-900">MedDRA</span>
+      );
+  }
+}
 
 export function Tools() {
   return (
@@ -66,20 +89,17 @@ export function ToolsMaster() {
           />
         </Reveal>
         <div className="mt-12 flex flex-wrap items-stretch justify-center gap-5">
-          {masterTools.map((tool, i) => {
-            const Icon = getIcon(tool.icon);
-            return (
-              <Reveal key={tool.name} delay={i * 80}>
-                <div className="tool-master-card group">
-                  <div className={`tool-master-icon bg-gradient-to-br ${tool.grad}`}>
-                    <Icon className="h-7 w-7 text-white" />
-                  </div>
-                  <h3 className="tool-master-name">{tool.name}</h3>
-                  <p className="tool-master-desc">{tool.desc}</p>
+          {masterTools.map((tool, i) => (
+            <Reveal key={tool.name} delay={i * 80}>
+              <div className="tool-master-card group">
+                <div className="tool-master-icon bg-white">
+                  <ToolLogo name={tool.name} />
                 </div>
-              </Reveal>
-            );
-          })}
+                <h3 className="tool-master-name">{tool.name}</h3>
+                <p className="tool-master-desc">{tool.desc}</p>
+              </div>
+            </Reveal>
+          ))}
         </div>
       </div>
     </section>

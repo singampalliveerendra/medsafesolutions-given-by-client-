@@ -23,13 +23,13 @@ const body = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: `${site.name} | Clinical Data Management Training in Kakinada`,
+    default: `${site.name} | Clinical Data Management Training in Visakhapatnam`,
     template: `%s | ${site.name}`
   },
   description: site.description,
   keywords: [
     "Clinical Data Management training",
-    "CDM course Kakinada",
+    "CDM course Visakhapatnam",
     "EDC training",
     "CDISC training",
     "B.Pharm CDM",
@@ -44,7 +44,7 @@ export const metadata: Metadata = {
     type: "website",
     siteName: site.name,
     url: site.url,
-    title: `${site.name} | Clinical Data Management Training in Kakinada`,
+    title: `${site.name} | Clinical Data Management Training in Visakhapatnam`,
     description: site.description,
     locale: "en_IN",
     images: [{ url: "/og.png", width: 1200, height: 630, alt: site.name }]

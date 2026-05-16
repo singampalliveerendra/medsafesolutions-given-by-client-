@@ -5,9 +5,7 @@ import { site, whatsappLink } from "@/data/site";
 const links = {
   Program: [
     { label: "Overview", href: "/#program" },
-    { label: "Modules", href: "/#highlights" },
-    { label: "Batches & Fees", href: "/#batches" },
-    { label: "Faculty", href: "/#faculty" }
+    { label: "Modules", href: "/#highlights" }
   ],
   Resources: [
     { label: "Blog", href: "/blog" },
@@ -45,8 +43,15 @@ export function Footer() {
             <div className="mt-5 grid gap-2 text-sm text-cream-50/90">
               <p className="flex items-start gap-2">
                 <MapPin className="mt-0.5 h-4 w-4 text-gold-300" />
-                {site.address.street}, {site.address.locality}, {site.address.region} {site.address.postalCode}
+                <span>
+                  <span className="block text-[0.7rem] font-bold uppercase tracking-[0.16em] text-gold-300">
+                    Registered Office
+                  </span>
+                  {site.address.street}, {site.address.locality}, {site.address.region} {site.address.postalCode}
+                </span>
               </p>
+              <p>Founder: {site.founder}</p>
+              <p className="text-cream-50/70">Classes are conducted online.</p>
               <a href={`tel:${site.phoneE164}`} className="flex items-center gap-2 hover:text-gold-300">
                 <Phone className="h-4 w-4 text-gold-300" /> {site.phone}
               </a>

@@ -17,7 +17,7 @@ export function Hero() {
         <Reveal className="max-w-[680px]">
           <div className="badge-pill-dark">
             <Sparkles className="h-4 w-4" />
-            AI-Enabled CDM Program · Kakinada
+            AI-Enabled CDM Program · Visakhapatnam
           </div>
           <h1 className="mt-6 max-w-[640px] text-balance font-display text-4xl font-black leading-[1.07] tracking-tight text-white sm:text-5xl lg:text-[3.8rem]">
             Clinical Data Management <span className="gradient-text">training built for a sharper, job-ready future.</span>
